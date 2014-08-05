@@ -26,53 +26,127 @@
 
 #include "turtle.hpp"
 
+#define PI 3.14159
+
 void turtle_t::reset(void) 
-{ }
+{
+    pos.x = 0;
+    pos.y = 0;
+    dir = 0;
+}
 
 void turtle_t::clear(void)
-{ }
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
 void turtle_t::set_pos(const vertex_t _pos)
-{ }
+{ 
+    pos = _pos;
+}
 
 void turtle_t::set_pos(const double _x, const double _y)
-{ }
+{ 
+    pos.x = _x;
+    pos.y = _y;
+}
 
 void turtle_t::set_dir(const double _dir)
-{ }
+{ 
+    dir = _dir;
+}
 
 void turtle_t::set_col(const color_t _col)
-{ }
+{ 
+    col = _col;
+}
 
 void turtle_t::set_col(const double _r, const double _g, const double _b)
-{ }
+{ 
+    col.r = _r;
+    col.g = _g;
+    col.b = _b;
+}
 
 void turtle_t::set_bgcol(const double _r, const double _g, const double _b)
-{ }
+{ 
+    glClearColor(_r, _g, _b, 0.0f );
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
 void turtle_t::scale(const double _s)
 { }
 
 void turtle_t::turn_left(const double _angle)    
-{ }
+{ 
+    dir = dir - _angle;
+    if(dir < 0)
+        dir = dir + 360;
+}
 
 void turtle_t::turn_right(const double _angle)
-{ }
+{ 
+    dir = dir + _angle;
+    if(dir >= 360)
+        dir = dir - 360;
+}
 
 void turtle_t::forward(const double _dist)  
-{ }
+{ 
+    glColor3f(col.r, col.g, col.b);
+    double endx, endy, angle;
+    angle = dir * PI / 180;
+    endx = pos.x + _dist * cos(angle);
+    endy = pos.y + _dist * sin(angle);
+    glBegin(GL_LINES);
+    glVertex2f(pos.x, pos.y);
+    glVertex2f(endx, endy);
+    glEnd();
+}
 
 void turtle_t::back(const double _dist)   
-{ }
+{
+    glColor3f(col.r, col.g, col.b);
+    double endx, endy, angle;
+    angle = dir * PI / 180;
+    endx = pos.x - _dist * cos(angle);
+    endy = pos.y - _dist * sin(angle);
+    glBegin(GL_LINES);
+    glVertex2f(pos.x, pos.y);
+    glVertex2f(endx, endy);
+    glEnd();
+}
 
 void turtle_t::forward_move(const double _dist)
-{ }
+{ 
+    double angle;
+    angle = dir * PI / 180;
+    pos.x = pos.x + _dist * cos(angle);
+    pos.y = pos.y + _dist * sin(angle);
+}
 
 void turtle_t::backward_move(const double _dist)
-{ }
+{   
+    double angle;
+    angle = dir * PI / 180;
+    pos.x = pos.x - _dist * cos(angle);
+    pos.y = pos.y - _dist * sin(angle);
+}
 
 void turtle_t::repeat(const unsigned int &_n, const turtle_com_list_t &_replist)
-{ }
+{ 
+    for(int i = 0; i < _n; i++) 
+    {
+        turtle_com_t *com;
+        turtle_com_list_t::iterator liter;
+        turtle_com_list_t list = _replist;
+        for( liter = list.begin(); liter!=list.end(); liter++)
+        {
+            com = *liter;
+            exec(com);
+        }
+    }
+}
 
 void turtle_t::exec(turtle_com_t *com)
 {
