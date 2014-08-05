@@ -102,6 +102,8 @@ void turtle_t::forward(const double _dist)
     glVertex2f(pos.x, pos.y);
     glVertex2f(endx, endy);
     glEnd();
+    pos.x = endx;
+    pos.y = endy;
 }
 
 void turtle_t::back(const double _dist)   
@@ -115,6 +117,8 @@ void turtle_t::back(const double _dist)
     glVertex2f(pos.x, pos.y);
     glVertex2f(endx, endy);
     glEnd();
+    pos.x = endx;
+    pos.y = endy;
 }
 
 void turtle_t::forward_move(const double _dist)
