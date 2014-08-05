@@ -78,9 +78,7 @@ void turtle_t::scale(const double _s)
 {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    //glPushMatrix();
     glScalef(_s,_s,0.0);
-    //glPopMatrix();
 }
 
 void turtle_t::turn_left(const double _angle)    
