@@ -66,7 +66,7 @@ public:
     //Reset turtle position and orientation
     reset(); 
     //Set the current draw color
-    col.r = 1.0; col.g = 1.0; col.b = 1.0;
+    col.r = 1.0; col.g = 1.0; col.b = 1.0; 
   }
 
   //Copy Constructor
