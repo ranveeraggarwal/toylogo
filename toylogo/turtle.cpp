@@ -26,7 +26,7 @@
 
 #include "turtle.hpp"
 
-#define PI 3.14159
+#define PI 3.141592653589793
 
 void turtle_t::reset(void) 
 {
