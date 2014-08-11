@@ -83,16 +83,16 @@ void turtle_t::scale(const double _s)
 
 void turtle_t::turn_left(const double _angle)    
 { 
-    dir = dir - _angle;
-    if(dir < 0)
-        dir = dir + 360;
+    dir = dir + _angle;
+    if(dir >= 360)
+        dir = dir - 360;
 }
 
 void turtle_t::turn_right(const double _angle)
 { 
-    dir = dir + _angle;
-    if(dir >= 360)
-        dir = dir - 360;
+    dir = dir - _angle;
+    if(dir < 360)
+        dir = dir + 360;
 }
 
 void turtle_t::forward(const double _dist)  
