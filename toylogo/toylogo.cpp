@@ -37,7 +37,7 @@ std::string filename, progname;
 bool file_flag=false;
 
 //GLFW display callback
-void renderGL( void )
+void renderGL(GLFWwindow* window)
 {
   //If a filename was given on the command line
   if (file_flag)
@@ -47,7 +47,7 @@ void renderGL( void )
       for( liter = list.begin(); liter!=list.end(); liter++)
 	{
 	  com = *liter;
-	  turt.exec(com);
+	  turt.exec(com, window);
 	}
     }
   //Or draw the default
@@ -155,7 +155,7 @@ int main (int argc, char *argv[])
     {
        
       // Render here
-      renderGL();
+      renderGL(window);
 
       // Swap front and back buffers
       glfwSwapBuffers(window);

@@ -18,11 +18,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
+#include <cstdlib>
+#include <unistd.h>
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <GL/glew.h>
+#include <unistd.h>
 #ifndef _TURTLE_HPP_
 #define _TURTLE_HPP_
 
 #include "turtle_defs.hpp"
+#include "gl_framework.hpp"
 
 /***************
  The Turtle class
@@ -123,10 +130,12 @@ public:
 
   //Repeat the execution of the commands given
   //in _replist _n times.
-  void repeat(const unsigned int &_n, const turtle_com_list_t &_replist);
+  void repeat(const unsigned int &_n, const turtle_com_list_t &_replist, GLFWwindow* window);
+
+  void pause(const double _t, GLFWwindow* window);
 
   //Executes the command com
-  void exec(turtle_com_t *com);
+  void exec(turtle_com_t *com, GLFWwindow* window);
 }; 
 
 #endif

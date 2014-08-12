@@ -18,12 +18,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
-#include <cmath>
-#include <iostream>
-#include <cstdlib>
-#include <GL/glew.h>
-
 #include "turtle.hpp"
 
 #define PI 3.141592653589793
@@ -141,7 +135,7 @@ void turtle_t::backward_move(const double _dist)
     pos.y = pos.y - _dist * sin(angle);
 }
 
-void turtle_t::repeat(const unsigned int &_n, const turtle_com_list_t &_replist)
+void turtle_t::repeat(const unsigned int &_n, const turtle_com_list_t &_replist, GLFWwindow* window)
 { 
     for(int i = 0; i < _n; i++) 
     {
@@ -151,12 +145,18 @@ void turtle_t::repeat(const unsigned int &_n, const turtle_com_list_t &_replist)
         for( liter = list.begin(); liter!=list.end(); liter++)
         {
             com = *liter;
-            exec(com);
+            exec(com,window);
         }
     }
 }
 
-void turtle_t::exec(turtle_com_t *com)
+void turtle_t::pause(const double _t, GLFWwindow* window)
+{
+    glfwSwapBuffers(window);
+    usleep(_t);
+}
+
+void turtle_t::exec(turtle_com_t *com, GLFWwindow* window)
 {
   if (com->cname==F)
     {
@@ -213,6 +213,11 @@ void turtle_t::exec(turtle_com_t *com)
       turtle_scale_t* scalecom = dynamic_cast<turtle_scale_t*>(com);
       if (scalecom) scale(scalecom->s);
     }
+  else if (com->cname==PAUSE)
+    {
+      turtle_pau_t* paucom = dynamic_cast<turtle_pau_t*>(com);
+      if (paucom) pause(paucom->time, window);
+    }
   else if (com->cname==REPEAT)
     {
       turtle_rep_t *repcom = dynamic_cast<turtle_rep_t*>(com);
@@ -221,7 +226,7 @@ void turtle_t::exec(turtle_com_t *com)
 	{
 	  unsigned int times = repcom->times;
 	  turtle_com_list_t sublist = repcom->replist;
-	  repeat(times, sublist);
+	  repeat(times, sublist, window);
 	}
      }
   else if ((com->cname==ENDREP) || (com->cname==END) || (com->cname==BEGIN)) 

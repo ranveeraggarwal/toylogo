@@ -41,7 +41,8 @@ enum turtle_com_name_t
     MB,
     COL,
     BGCOL,
-    SCALE
+    SCALE,
+    PAUSE
   };
    
 //Generic turtle command type
@@ -74,6 +75,14 @@ struct turtle_fwd_t : public turtle_com_t
 
   turtle_fwd_t& operator=(turtle_fwd_t& _com)
   {cname=_com.cname; dist=_com.dist; return *this;}
+};
+struct turtle_pau_t : public turtle_com_t
+{
+  double time;
+  turtle_pau_t() {cname=PAUSE; time=0.0;}
+
+  turtle_pau_t& operator=(turtle_pau_t& _com)
+  {cname=_com.cname; time=_com.time; return *this;}
 };
 struct turtle_bck_t : public turtle_com_t 
 { 
