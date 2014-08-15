@@ -149,7 +149,7 @@ int main (int argc, char *argv[])
   csX75::framebuffer_size_callback(window, win_width, win_height);
   //Initialize GL state
   csX75::initGL();
-
+  glEnable(GL_DEPTH_TEST);
   // Loop until the user closes the window
   while (glfwWindowShouldClose(window) == 0)
     {
