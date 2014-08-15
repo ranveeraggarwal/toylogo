@@ -63,15 +63,8 @@ void turtle_t::set_col(const double _r, const double _g, const double _b)
 }
 
 void turtle_t::set_bgcol(const double _r, const double _g, const double _b)
-{ 
-    glColor3f(_r, _g, _b);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glBegin(GL_QUADS);
-        glVertex3f(-3.0f, -3.0f, -1.0f);
-        glVertex3f(-3.0f, 3.0f, -1.0f);
-        glVertex3f(3.0f, 3.0f, -1.0f);
-        glVertex3f(3.0f, -3.0f, -1.0f);
-    glEnd();
+{
+    glClearColor(_r, _g, _b, 1.0); 
 }
 
 void turtle_t::scale(const double _s)
