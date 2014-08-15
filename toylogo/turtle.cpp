@@ -152,7 +152,7 @@ void turtle_t::repeat(const unsigned int &_n, const turtle_com_list_t &_replist,
 void turtle_t::pause(const double _t, GLFWwindow* window)
 {
     glfwSwapBuffers(window);
-    usleep(_t);
+    usleep(_t*1000);
 }
 
 void turtle_t::exec(turtle_com_t *com, GLFWwindow* window)
