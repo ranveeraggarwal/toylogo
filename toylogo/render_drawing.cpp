@@ -20,8 +20,7 @@
 
 
 #include "render_drawing.hpp"
-
-
+/*
 void triline(turtle_t &turt, double length)
 {
    if (length <= 0.01)
@@ -59,4 +58,33 @@ void koch(turtle_t &turt, double x)
 void render_drawing(turtle_t &turt)
 {
   koch(turt, 1.0);
+}
+*/
+void dragon(turtle_t &turt, int n) 
+{
+	if (n == 0) turt.forward(0.02);
+	else {
+		dragon(turt, n-1);
+		turt.turn_left(90);
+		nogard(turt, n-1);
+	}
+}
+
+void nogard(turtle_t &turt, int n)
+{
+        if (n == 0) turt.forward(0.02);
+        else {
+                dragon(turt, n-1);
+                turt.turn_right(90);
+                nogard(turt, n-1);
+        }
+}
+
+void render_drawing (turtle_t &turt)
+{
+	turt.reset();
+	   turt.clear();
+	   turt.set_pos(0.52, -0.5);
+
+	dragon(turt, 12);
 }

@@ -25,4 +25,8 @@
 
 void render_drawing(turtle_t &turt);
 
+void dragon(turtle_t &turt, int n);
+
+void nogard(turtle_t &turt, int n);
+
 #endif
