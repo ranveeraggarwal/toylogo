@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="keywords" content="toylogo, graphics">
+    <title>CS 475 Assignment I</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  </head>
+
+  <body>
+  <div class="wrapper">
+      <div class="header">
+          <h2>
+              CS475 
+              <br>
+              Computer Graphics
+              <br>
+              Assignment I
+          </h2>
+          <hr>
+          <ul class="newl">
+              <li>
+                  <a href="#intro">Introduction</a>
+              </li>
+              <li>
+                  <a href="#imple">Implementation</a>
+              </li>
+              <li>
+                  <a href="#snaps">Toylogo Snaps</a>
+              </li>
+              <li>
+                  <a href="#complex">Complex Drawing</a>
+              </li>
+              <li>
+                  <a href="#pause">The Pause Function</a>
+              </li>
+              <li>
+                  <a href="#recurse">Recursive Fractal</a>
+              </li>
+          </ul>
+          <hr>
+          <p>Developed by 
+          	<br>
+ 	        <b>Ranveer Aggarwal</b> | 120050020 
+ 	        <br>
+ 	        <b>Abhinav Gupta</b> | 120050029
+ 	      </p>
+ 	      <hr>
+      </div>
+      <div class="section">
+		  <a name="intro"><h1>Introduction</h1></a>      	
+          <p>
+              This is our submission for the first assignment of Computer Graphics. The problem statement can be found <a href="http://www.cse.iitb.ac.in/~paragc/teaching/2014/cs475/assignments/A1.pdf">here</a>. 
+              <br>
+              Basically, the task is to implement toylogo in C++ using the openGL library.
+          </p>
+
+          <hr>
+
+          <a name="imple"><h1>Implementation</h1></a>
+          <h3>Given</h3>
+          <p>A rudimentary parser with methods defined, but not implemented was given. The task was to implement them. </p>
+          <h3>Our Solution</h3>
+          <p>
+            Using various openGL functions, we implemented the predefined methods. Maximum amount of change was made in the <i>turtle.cpp</i> file. 
+            <br>
+            Here is how we implemented everything:
+            <ul>
+            	<li>
+            		<b>RESET</b>: We set the position variables and the direction variables to zero, placing the turtle right at the center of the screen.
+            	</li>
+            	<li>
+            		<b>CLS</b>: For this we used <code>glclear</code> to clear the color and depth buffer bits.
+            	</li>
+            	<li>
+            		<b>F, MF, B, MB, L and R</b>: These involved simple manipulation of the <code>pos</code> and <code>dir</code> variables.
+            	</li>
+            	<li>
+            		<b>COL</b>: Again, simply setting the <code>col</code> variable did the trick.
+            	</li>
+            	<li>
+            		<b>BGCOL</b>: This involved passing the given arguments to <code>glclearcolor</code> function.
+            	</li>
+            	<li>
+            		<b>SCALE</b>: Transformation matrices were used for this with the built-in openGL <code>glscale</code> function.
+            	</li>
+            	<li>
+            		<b>REPEAT</b>: For implementing this, we replicated the loop that was running all the parser commands, i.e., iteratively pushing the commands into a list of commands and then executing them.
+            	</li>
+            </ul>
+          </p>
+
+          <hr>
+
+          <a name="snaps"><h1>Snapshots</h1></a>
+          <p>
+            Running the given examples produce the following results:
+            <ul>
+            	<li>
+            		<b>Example I</b>
+<pre>
+	BEGIN
+	CLS
+	RESET
+	REPEAT 4
+	F 0.2
+	R 90
+	ENDREP
+	END
+</pre>
+            		<center><img src="./img/example1.png" style="height:50%; width:50%;"></center>
+            	</li>
+            	<br>
+            	<li>
+            		<b>Example II</b>
+<pre>
+	BEGIN
+	CLS
+	RESET
+	REPEAT 36
+	REPEAT 4
+	F 0.4
+	R 90
+	ENDREP
+	R 10
+	ENDREP
+	END
+</pre>
+            		<center><img src="./img/example2.png" style="height:50%; width:50%;"></center>
+            	</li>
+            	<br>
+            	<li>
+            		<b>Example III</b>
+<pre>
+	BEGIN
+	CLS
+ 		RESET
+	REPEAT 36
+	REPEAT 36
+	F 0.05
+	R 10
+	ENDREP
+	R 10
+	ENDREP
+	END
+</pre>
+            		<center><img src="./img/example3.png" style="height:50%; width:50%;"></center>
+            	</li>
+            </ul>
+          </p>
+
+          <hr>
+
+          <a name="complex"><h1>Complex Simulation</h1></a>
+          <p>
+          	The code fo our complex simulation is:
+<pre>
+	BEGIN
+	CLS
+	RESET
+	REPEAT 36
+	R 10
+	REPEAT 8
+	F 0.25
+	L 45
+	ENDREP
+	ENDREP
+	END
+</pre> 
+          	and the output is:
+          </p>
+          	<center><img src="./img/complex.png" style="height:50%; width:50%;"></center>
+
+          <hr>
+
+          <a name="pause"><h1>Pause Function</h1></a>
+          <h3>Implementation</h3>
+          <p>
+              Content!
+          </p>
+          <h3>Snapshots</h3>
+          <p>Content!</p>
+
+          <hr>
+
+          <a name="recurse"><h1>Recursive Drawing</h1></a>
+          <h3>Implementation</h3>
+          <p>
+              Content!
+          </p>
+          <h3>Snapshot</h3>
+          <center><img src="./img/dragon.png" style="height:50%; width:50%;"></center>
+
+          <hr>
+      </div>
+  </div>
+  
+  </body>
+</html>

@@ -1,0 +1,54 @@
+@font-face{
+    font-family:"robotox";
+    src:url(../fonts/roboto-light-webfont.woff)
+}
+
+body{
+	padding: 50px;
+	font-family: 'robotox', sans-serif;
+}
+
+.wrapper{
+	width: 90%;
+	margin:0 auto;
+}
+
+.header{
+	float: left;
+	width: 20%;
+	position:fixed;
+	margin-right: 10%;
+}
+
+.section{
+	margin-left: 10%;
+	float: right;
+	width: 70%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color:#2E2D2D;
+  margin:0 0 20px;
+}
+
+a {
+  color:#3C3; 
+  text-decoration:none;
+}
+
+a:hover {
+  color:#259900;
+}
+
+pre {
+  padding:10px;
+  background: #F7F7F7;  
+}
+
+.newl{
+	list-style:none;
+}
+
+hr {
+  background:#2E2D2D;
+}
