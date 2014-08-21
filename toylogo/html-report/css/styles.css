@@ -44,6 +44,10 @@ pre {
   padding:10px;
   background: #F7F7F7;  
 }
+code{
+	padding:3px;
+	background: #F7F7F7;
+}
 
 .newl{
 	list-style:none;

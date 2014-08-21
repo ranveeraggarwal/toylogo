@@ -41,7 +41,7 @@
               </li>
           </ul>
           <hr>
-          <p>Developed by 
+          <p style="bottom:50px;">Developed by 
           	<br>
  	        <b>Ranveer Aggarwal</b> | 120050020 
  	        <br>
@@ -101,52 +101,58 @@
             	<li>
             		<b>Example I</b>
 <pre>
-	BEGIN
-	CLS
-	RESET
-	REPEAT 4
-	F 0.2
-	R 90
-	ENDREP
-	END
+  BEGIN
+  CLS
+  RESET
+  BGCOL 1 1 1
+  COL 0 0 0
+  REPEAT 4
+  F 0.2
+  R 90
+  ENDREP
+  END
 </pre>
-            		<center><img src="./img/example1.png" style="height:50%; width:50%;"></center>
+            		<center><img src="./img/example1.png" style="height:30%; width:30%;"></center>
             	</li>
             	<br>
             	<li>
             		<b>Example II</b>
 <pre>
-	BEGIN
-	CLS
-	RESET
-	REPEAT 36
-	REPEAT 4
-	F 0.4
-	R 90
-	ENDREP
-	R 10
-	ENDREP
-	END
+  BEGIN
+  CLS
+  RESET
+  BGCOL 1 1 1
+  COL 0 0 0
+  REPEAT 36
+  REPEAT 4
+  F 0.4
+  R 90
+  ENDREP
+  R 10
+  ENDREP
+  END
 </pre>
-            		<center><img src="./img/example2.png" style="height:50%; width:50%;"></center>
+            		<center><img src="./img/example2.png" style="height:30%; width:30%;"></center>
             	</li>
             	<br>
             	<li>
             		<b>Example III</b>
 <pre>
-	BEGIN
-	CLS
- 		RESET
-	REPEAT 36
-	REPEAT 36
-	F 0.05
-	R 10
-	ENDREP
-	R 10
-	ENDREP
-	END
+  BEGIN
+  CLS
+  RESET
+  BGCOL 1 1 1
+  COL 0 0 0
+  REPEAT 36
+  REPEAT 36
+  F 0.05
+  R 10
+  ENDREP
+  R 10
+  ENDREP
+  END
 </pre>
-            		<center><img src="./img/example3.png" style="height:50%; width:50%;"></center>
+            		<center><img src="./img/example3.png" style="height:30%; width:30%;"></center>
             	</li>
             </ul>
           </p>
@@ -157,45 +163,84 @@
           <p>
           	The code fo our complex simulation is:
 <pre>
-	BEGIN
-	CLS
-	RESET
-	REPEAT 36
-	R 10
-	REPEAT 8
-	F 0.25
-	L 45
-	ENDREP
-	ENDREP
-	END
+  BEGIN
+  CLS
+  RESET
+  BGCOL 1 1 1
+  COL 0 0 0
+  REPEAT 36
+  R 10
+  REPEAT 8
+  F 0.25
+  L 45
+  ENDREP
+  ENDREP
+  END
 </pre> 
           	and the output is:
           </p>
-          	<center><img src="./img/complex.png" style="height:50%; width:50%;"></center>
+          	<center><img src="./img/complex.png" style="height:30%; width:30%;"></center>
 
           <hr>
 
           <a name="pause"><h1>Pause Function</h1></a>
-          <h3>Implementation</h3>
           <p>
-              Content!
+              Firstly, in the file <i>turtle_defs.hpp</i>, we added <b>PAUSE</b> in the <code>turtle_com_name_t</code> enum and also added another struct for implementing pause, inheriting from <code>turtle_com_t</code> struct. The new struct looks like:
+<pre>
+struct turtle_pau_t : public turtle_com_t
+{
+  double time;
+  turtle_pau_t() {cname=PAUSE; time=0.0;} 
+  turtle_pau_t& operator=(turtle_pau_t& _com)
+  {cname=_com.cname; time=_com.time; return *this;}
+}
+</pre>
+              Next, to make use of the dual buffers, we wanted to get these buffers to the <i>turtle.cpp</i> file where the commands were defined. For doing this, we passed the <code>window</code> to the <i>turtle.cpp</i> through the <code>exec</code> function. For doing this, the signatures of the <code>exec</code> function were to be changed. This was then done in <i>turtle.hpp</i> and <i>turtle.cpp</i> files. Then, we created the <code>pause</code> method in the <code>turtle_t</code> class and wrote the following code for it in the cpp file:
+<pre>
+void turtle_t::pause(const double _t, GLFWwindow* window)
+{
+  glfwSwapBuffers(window);
+  usleep(_t*1000);
+}
+</pre>
+              So, in principle, what we did was, that each time a <b>PAUSE</b> is called, the buffer gets swapped and there is a delay of t*1000 &#956;s or t ms for the next command to be rendered. This in turn gives the illusion of animation.
           </p>
-          <h3>Snapshots</h3>
-          <p>Content!</p>
-
           <hr>
 
           <a name="recurse"><h1>Recursive Drawing</h1></a>
           <h3>Implementation</h3>
           <p>
-              Content!
+              For our complex recursive drawing, we made the dragon curve. The algorithm governing this drawing is simple:
+<pre>
+  DRAGON(n)
+  {
+    DRAGON(n-1)
+    MOVE LEFT
+    NODRAG(n-1)
+  }
+  NODRAG(n)
+  {
+    NODRAG(n-1)
+    MOVE RIGHT
+    DRAGON(n-1)
+  }
+</pre>
+And then we call <code>DRAGON(value)</code> or <code>NODRAG(value)</code> depending on the orientation we need. This was easily implmented with the previously defined turtle functions.
           </p>
-          <h3>Snapshot</h3>
-          <center><img src="./img/dragon.png" style="height:50%; width:50%;"></center>
-
+          <h3>Snapshots</h3>
+          <ul>
+            <li>
+              For 12 iterations, we get:
+              <center><img src="./img/dragon1.png" style="height:30%; width:30%;"></center>
+            </li>
+            <br>
+            <li>
+              For 15 iterations (and smaller forward movements), we get:
+              <center><img src="./img/dragon2.png" style="height:90%; width:90%;"></center>
+            </li>
+          </ul>
           <hr>
       </div>
   </div>
-  
   </body>
 </html>

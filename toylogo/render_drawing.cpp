@@ -60,9 +60,10 @@ void render_drawing(turtle_t &turt)
   koch(turt, 1.0);
 }
 */
+
 void dragon(turtle_t &turt, int n) 
 {
-	if (n == 0) turt.forward(0.02);
+	if (n == 0) turt.forward(0.005);
 	else {
 		dragon(turt, n-1);
 		turt.turn_left(90);
@@ -72,7 +73,7 @@ void dragon(turtle_t &turt, int n)
 
 void nogard(turtle_t &turt, int n)
 {
-        if (n == 0) turt.forward(0.02);
+        if (n == 0) turt.forward(0.005);
         else {
                 dragon(turt, n-1);
                 turt.turn_right(90);
@@ -82,9 +83,10 @@ void nogard(turtle_t &turt, int n)
 
 void render_drawing (turtle_t &turt)
 {
-	turt.reset();
-	   turt.clear();
-	   turt.set_pos(0.52, -0.5);
-
-	dragon(turt, 12);
+  turt.reset();
+  turt.clear();
+	turt.set_bgcol(1,1,1);
+	turt.set_col(0,0,0);
+	turt.set_pos(-0.2, 0.3);
+	dragon(turt, 15);
 }
