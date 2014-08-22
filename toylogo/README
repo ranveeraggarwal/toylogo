@@ -1,16 +1,32 @@
-1.
-To compile just type "make" on the command line.
+CS 475: Computer Graphics
+Assignment I
+Implementation of Toylogo
 
-2.
-Pressing ESC will quit the program.
+Developed by:
+Ranveer Aggarwal | 120050020
+Abhinav Gupta | 120050029
 
-3.
-Use 
+---
 
-toylogo -f <filename.logo> 
+An HTML report can be found at http://www.cse.iitb.ac.in/~ranveer/graphics_1/
 
-to run a LOGO program. You can try this with toylogo_complete. The output from your compelted code should match this.
+The report is also added to this folder.
 
+---
 
-4.
-This code uses OpenGL 2.1.
+Instructions
+1. To compile just type "make" on the command line.
+2. Pressing ESC will quit the program.
+3. Use 
+
+        toylogo -f <filename.logo>
+
+    to run a LOGO program. You can try this with toylogo_complete. The output from your compelted code should match this.
+4.This code uses OpenGL 2.1.
+
+---
+
+Declaration
+We declare that this is our own work and we have not plagiarised it. Any resemblance to other source is not intentional.
+
+---

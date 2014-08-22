@@ -87,7 +87,7 @@
             		<b>SCALE</b>: Transformation matrices were used for this with the built-in openGL <code>glscale</code> function.
             	</li>
             	<li>
-            		<b>REPEAT</b>: For implementing this, we replicated the loop that was running all the parser commands, i.e., iteratively pushing the commands into a list of commands and then executing them.
+            		<b>REPEAT</b>: For implementing this, we replicated the loop that was running all the parser commands, i.e., iteratively pushing the commands into a list of commands and then executing them using the <code>exec()</code> method.
             	</li>
             </ul>
           </p>
@@ -161,25 +161,65 @@
 
           <a name="complex"><h1>Complex Simulation</h1></a>
           <p>
-          	The code fo our complex simulation is:
+          	The code of our complex simulation is:
 <pre>
-  BEGIN
-  CLS
-  RESET
-  BGCOL 1 1 1
-  COL 0 0 0
-  REPEAT 36
-  R 10
-  REPEAT 8
-  F 0.25
-  L 45
-  ENDREP
-  ENDREP
-  END
+BEGIN
+CLS
+SCALE 2
+RESET
+COL 1.0 0.6 0.2
+REPEAT 36
+REPEAT 4
+F 0.5
+R 90
+F 0.5
+L 90
+F 0.5
+R 90
+ENDREP
+R 10
+ENDREP
+COL 1.0 1.0 1.0
+REPEAT 36
+REPEAT 4
+F 0.4
+L 90
+F 0.4
+R 90
+F 0.4
+L 90
+ENDREP
+R 10
+ENDREP
+COL 0.074 0.533 0.0313
+REPEAT 36
+REPEAT 4
+F 0.3
+R 90
+F 0.3
+L 90
+F 0.3
+R 90
+ENDREP
+R 10
+ENDREP
+COL 0 0 0.502
+REPEAT 36
+REPEAT 4
+F 0.2
+L 90
+F 0.2
+R 90
+F 0.2
+L 90
+ENDREP
+R 10
+ENDREP
+END
 </pre> 
           	and the output is:
           </p>
-          	<center><img src="./img/complex.png" style="height:30%; width:30%;"></center>
+          	<center><img src="./img/complex.png" style="height:70%; width:70%;"></center>
 
           <hr>
 
@@ -195,7 +235,7 @@ struct turtle_pau_t : public turtle_com_t
   {cname=_com.cname; time=_com.time; return *this;}
 }
 </pre>
-              Next, to make use of the dual buffers, we wanted to get these buffers to the <i>turtle.cpp</i> file where the commands were defined. For doing this, we passed the <code>window</code> to the <i>turtle.cpp</i> through the <code>exec</code> function. For doing this, the signatures of the <code>exec</code> function were to be changed. This was then done in <i>turtle.hpp</i> and <i>turtle.cpp</i> files. Then, we created the <code>pause</code> method in the <code>turtle_t</code> class and wrote the following code for it in the cpp file:
+              Next, to make use of the dual buffers, we wanted to get these buffers to the <i>turtle.cpp</i> file where the commands were defined. For doing this, we passed the <code>window</code> to the <i>turtle.cpp</i> through the <code>exec</code> function. For doing this, the signature of the <code>exec</code> function were to be changed. This was then done in <i>turtle.hpp</i> and <i>turtle.cpp</i> files. Then, we created the <code>pause</code> method in the <code>turtle_t</code> class and wrote the following code for it in the cpp file:
 <pre>
 void turtle_t::pause(const double _t, GLFWwindow* window)
 {
